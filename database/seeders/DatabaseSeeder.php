@@ -1,6 +1,10 @@
 <?php
+
 namespace Database\Seeders;
 
+use App\Models\Student;
+use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,6 +16,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([UsersTableSeeder::class]);
+
+
+        $this->call([
+            RoleSeeder::class,
+            CareerSeeder::class,
+        ]);
+
+        $user = User::factory()->create([
+            'email' => 'admin@admin.com'
+        ])->assignRole('admin');
+
+        Teacher::factory(5)->create();
+        Student::factory(10)->create();
     }
 }
