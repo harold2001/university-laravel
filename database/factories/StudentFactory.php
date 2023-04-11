@@ -24,7 +24,7 @@ class StudentFactory extends Factory
             "name" => fake()->firstName(),
             "last_name" => fake()->lastName(),
             "phone" => fake()->phoneNumber(),
-            "official_code" => fake()->unique()->ean8()
+            "id_code" => fake()->unique()->ean8()
         ];
     }
 }

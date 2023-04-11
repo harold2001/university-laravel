@@ -1,21 +1,3 @@
-<!--
-=========================================================
- Paper Dashboard - v2.0.0
-=========================================================
-
- Product Page: https://www.creative-tim.com/product/paper-dashboard
- Copyright 2019 Creative Tim (https://www.creative-tim.com)
- UPDIVISION (https://updivision.com)
- Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard/blob/master/LICENSE)
-
- Coded by Creative Tim
-
-=========================================================
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,15 +8,22 @@ The above copyright notice and this permission notice shall be included in all c
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
     <!-- Extra details for Live View on GitHub Pages -->
-    
+
     <title>
         University
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport' />
     <!--     Fonts and icons     -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    </script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <!-- datatables.net -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <!-- CSS Files -->
     <link href="{{ asset('paper') }}/css/bootstrap.min.css" rel="stylesheet" />
     <link href="{{ asset('paper') }}/css/paper-dashboard.css?v=2.0.0" rel="stylesheet" />
@@ -44,12 +33,12 @@ The above copyright notice and this permission notice shall be included in all c
 </head>
 
 <body class="{{ $class }}">
-    
+
     @auth()
         @include('layouts.page_templates.auth')
-        @include('layouts.navbars.fixed-plugin')
+        {{-- @include('layouts.navbars.fixed-plugin') --}}
     @endauth
-    
+
     @guest
         @include('layouts.page_templates.guest')
     @endguest
@@ -63,6 +52,7 @@ The above copyright notice and this permission notice shall be included in all c
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
     <!-- Chart JS -->
     <script src="{{ asset('paper') }}/js/plugins/chartjs.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <!--  Notifications Plugin    -->
     <script src="{{ asset('paper') }}/js/plugins/bootstrap-notify.js"></script>
     <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
@@ -71,10 +61,10 @@ The above copyright notice and this permission notice shall be included in all c
     <script src="{{ asset('paper') }}/demo/demo.js"></script>
     <!-- Sharrre libray -->
     <script src="../assets/demo/jquery.sharrre.js"></script>
-    
+
     @stack('scripts')
 
-    @include('layouts.navbars.fixed-plugin-js')
+    {{-- @include('layouts.navbars.fixed-plugin-js') --}}
 </body>
 
 </html>

@@ -5146,8 +5146,9 @@ License - nucleoapp.com/license/
 
 .main-panel>.content {
   padding: 0 30px 30px;
-  min-height: calc(100vh - 123px);
-  margin-top: 93px;
+  min-height: 100vh;
+  /* min-width: 100vw; */
+  padding-top: 93px;
 }
 
 .main-panel>.navbar {
