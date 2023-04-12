@@ -4,11 +4,12 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Spatie\Permission\Models\Role;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Student>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\DataUser>
  */
-class StudentFactory extends Factory
+class UsersDataFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,14 +18,10 @@ class StudentFactory extends Factory
      */
     public function definition(): array
     {
-        $user = User::factory()->create()->assignRole('alumno');
-
         return [
-            "user_id" => $user->id,
             "name" => fake()->firstName(),
             "last_name" => fake()->lastName(),
-            "phone" => fake()->phoneNumber(),
-            "id_code" => fake()->unique()->ean8()
+            "phone" => fake()->e164PhoneNumber(),
         ];
     }
 }

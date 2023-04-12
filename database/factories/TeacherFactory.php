@@ -17,7 +17,7 @@ class TeacherFactory extends Factory
      */
     public function definition(): array
     {
-        $user = User::factory()->create()->assignRole('teacher');
+        $user = User::factory()->create()->assignRole('maestro');
         
         return [
             "user_id" => $user->id,

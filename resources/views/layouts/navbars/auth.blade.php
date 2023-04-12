@@ -40,7 +40,8 @@
                     <ul class="nav">
                         <li class="{{ $elementActive == 'users' ? 'active' : '' }}">
                             <a href="{{ route('users.index') }}">
-                                <span class="sidebar-mini-icon">1</span>
+                                <span class="sidebar-mini-icon"><img src="{{ asset('paper/img/users.svg') }}"
+                                        alt="Users" height="20"></span>
                                 <span class="sidebar-normal">TODOS</span>
                             </a>
                         </li>

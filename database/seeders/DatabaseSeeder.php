@@ -2,11 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Models\DataUser;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,25 +19,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
-
         $this->call([
             RoleSeeder::class,
             CareerSeeder::class,
+            UserAdminSeeder::class
         ]);
 
-        $user = User::factory()->create([
-            'email' => 'admin@admin.com'
-        ])->assignRole('admin');
+        $amountUsers = 5;
 
-        DB::table('teachers')->insert([
-            "user_id" => $user->id,
-            "name" => "Admin",
-            "last_name" => "Test",
-            "phone" => fake()->phoneNumber(),
-        ]);
+        for ($i = 0; $i < $amountUsers; $i++) {
+            $this->call(TeacherSeeder::class);
+        }
 
-        Teacher::factory(5)->create();
-        Student::factory(10)->create();
+        for ($i = 0; $i < $amountUsers; $i++) {
+            $this->call(StudentSeeder::class);
+        }
     }
 }

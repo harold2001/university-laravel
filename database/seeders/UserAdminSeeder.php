@@ -1,11 +1,14 @@
 <?php
+
 namespace Database\Seeders;
 
+use App\Models\User;
+use App\Models\UsersData;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
-class UsersTableSeeder extends Seeder
+class UserAdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,12 +17,15 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        $user = User::factory()->create([
             'email' => 'admin@admin.com',
             'password' => Hash::make('adminadmin'),
-            'email_verified_at' => now(),
-            'created_at' => now(),
-            'updated_at' => now()
+        ])->assignRole('admin');
+
+        UsersData::factory()->create([
+            "user_id" => $user->id,
+            "name" => "Admin",
+            "last_name" => "Test",
         ]);
     }
 }
