@@ -26,6 +26,7 @@ class UserAdminSeeder extends Seeder
             "user_id" => $user->id,
             "name" => "Admin",
             "last_name" => "Test",
+            "id_code" => "M".fake()->unique()->ean8()
         ]);
     }
 }

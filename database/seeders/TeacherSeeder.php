@@ -19,7 +19,7 @@ class TeacherSeeder extends Seeder
 
         UsersData::factory()->create([
             "user_id" => $user->id,
-            "id_code" => "P".fake()->unique()->ean8()
+            "id_code" => "M".fake()->unique()->ean8()
         ]);
     }
 }

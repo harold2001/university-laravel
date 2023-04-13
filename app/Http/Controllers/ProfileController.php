@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
+use App\Models\User;
+use App\Models\UsersData;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -26,9 +28,17 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request)
     {
+        // No hacemos validación porque ProfileRequest ya la hace al entrar la data en la función
+
+        $user = UsersData::where("user_id", $request->id)->first();
+        $user->name = $request->name;
+        $user->last_name = $request->last_name;
+        $user->phone = $request->phone;
+        $user->save();
+
         auth()->user()->update($request->all());
 
-        return back()->withStatus(__('Profile successfully updated.'));
+        return back()->withStatus('Datos del perfil actualizados correctamente.');
     }
 
     /**
@@ -41,6 +51,6 @@ class ProfileController extends Controller
     {
         auth()->user()->update(['password' => Hash::make($request->get('password'))]);
 
-        return back()->withPasswordStatus(__('Password successfully updated.'));
+        return back()->withPasswordStatus(__('Contraseña actualizada con éxito.'));
     }
 }

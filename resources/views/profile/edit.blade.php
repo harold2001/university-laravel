@@ -1,6 +1,6 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'profile'
+    'elementActive' => 'profile',
 ])
 
 @section('content')
@@ -23,13 +23,12 @@
                     </div>
                     <div class="card-body">
                         <div class="author">
-                            <a href="#">
-                                <img class="avatar border-gray" src="{{ asset('paper/img/mike.jpg') }}" alt="...">
+                            <img class="avatar border-gray" src="{{ asset('paper/img/mike.jpg') }}" alt="...">
 
-                                <h5 class="title">{{ __(auth()->user()->name)}}</h5>
-                            </a>
+                            <h5 class="title text-primary mb-1">{{ auth()->user()->data_user->name }}
+                                {{ auth()->user()->data_user->last_name }}</h5>
                             <p class="description">
-                            @ {{ __(auth()->user()->name)}}
+                                ID: {{ auth()->user()->data_user->id_code }}
                             </p>
                         </div>
                         <p class="description text-center">
@@ -64,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card">
+                {{-- <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">{{ __('Team Members') }}</h4>
                     </div>
@@ -74,8 +73,8 @@
                                 <div class="row">
                                     <div class="col-md-2 col-2">
                                         <div class="avatar">
-                                            <img src="{{ asset('paper/img/faces/ayo-ogunseinde-2.jpg') }}" alt="Circle Image"
-                                                class="img-circle img-no-padding img-responsive">
+                                            <img src="{{ asset('paper/img/faces/ayo-ogunseinde-2.jpg') }}"
+                                                alt="Circle Image" class="img-circle img-no-padding img-responsive">
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-7">
@@ -100,7 +99,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-7">
-                                            {{ __('Creative Tim') }}
+                                        {{ __('Creative Tim') }}
                                         <br />
                                         <span class="text-success">
                                             <small>{{ __('Available') }}</small>
@@ -116,8 +115,8 @@
                                 <div class="row">
                                     <div class="col-md-2 col-2">
                                         <div class="avatar">
-                                            <img src="{{ asset('paper/img/faces/clem-onojeghuo-2.jpg') }}" alt="Circle Image"
-                                                class="img-circle img-no-padding img-responsive">
+                                            <img src="{{ asset('paper/img/faces/clem-onojeghuo-2.jpg') }}"
+                                                alt="Circle Image" class="img-circle img-no-padding img-responsive">
                                         </div>
                                     </div>
                                     <div class="col-ms-7 col-7">
@@ -135,39 +134,71 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="col-md-8 text-center">
-                <form class="col-md-12" action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                <form class="col-md-12" action="{{ route('profile.update', ['id' => auth()->user()->id]) }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="title">{{ __('Edit Profile') }}</h5>
+                            <h5 class="title">Editar mis datos</h5>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <label class="col-md-3 col-form-label">{{ __('Name') }}</label>
+                                <label class="col-md-3 col-form-label">Nombre:</label>
                                 <div class="col-md-9">
-                                    <div class="form-group">
-                                        <input type="text" name="name" class="form-control" placeholder="Name" value="{{ auth()->user()->name }}" required>
+                                    <div class="form-group mb-0">
+                                        <input type="text" name="name" class="form-control"
+                                            placeholder="Ingresa tu nombre" value="{{ auth()->user()->data_user->name }}">
                                     </div>
-                                    @if ($errors->has('name'))
-                                        <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('name') }}</strong>
+                                    @error('name')
+                                        <span class="invalid-feedback m-0" style="display: block;" role="alert">
+                                            <strong>Este campo no puede estar vacío.</strong>
                                         </span>
-                                    @endif
+                                    @enderror
                                 </div>
                             </div>
                             <div class="row">
-                                <label class="col-md-3 col-form-label">{{ __('Email') }}</label>
+                                <label class="col-md-3 col-form-label">Apellidos:</label>
                                 <div class="col-md-9">
-                                    <div class="form-group">
-                                        <input type="email" name="email" class="form-control" placeholder="Email" value="{{ auth()->user()->email }}" required>
+                                    <div class="form-group mb-0 mt-2">
+                                        <input type="text" name="last_name" class="form-control"
+                                            placeholder="Ingresa tu nombre"
+                                            value="{{ auth()->user()->data_user->last_name }}">
+                                    </div>
+                                    @error('last_name')
+                                        <span class="invalid-feedback m-0" style="display: block;" role="alert">
+                                            <strong>Este campo no puede estar vacío.</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-3 col-form-label">Teléfono:</label>
+                                <div class="col-md-9">
+                                    <div class="form-group mb-0 mt-2">
+                                        <input type="text" name="phone" class="form-control"
+                                            placeholder="Ingresa tu nombre" value="{{ auth()->user()->data_user->phone }}">
+                                    </div>
+                                    @error('phone')
+                                        <span class="invalid-feedback m-0" style="display: block;" role="alert">
+                                            <strong>Este campo no puede estar vacío.</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-3 col-form-label">Email:</label>
+                                <div class="col-md-9">
+                                    <div class="form-group mb-0 mt-2">
+                                        <input type="email" name="email" class="form-control"
+                                            placeholder="Ingresa tu email" value="{{ auth()->user()->email }}">
                                     </div>
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
-                                            <strong>{{ $errors->first('email') }}</strong>
+                                            <strong>Este campo no puede estar vacío.</strong>
                                         </span>
                                     @endif
                                 </div>
@@ -176,7 +207,7 @@
                         <div class="card-footer ">
                             <div class="row">
                                 <div class="col-md-12 text-center">
-                                    <button type="submit" class="btn btn-info btn-round">{{ __('Save Changes') }}</button>
+                                    <button type="submit" class="btn btn-info btn-round">Guardar cambios</button>
                                 </div>
                             </div>
                         </div>
@@ -187,40 +218,45 @@
                     @method('PUT')
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="title">{{ __('Change Password') }}</h5>
+                            <h5 class="title">Cambiar mi contraseña</h5>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <label class="col-md-3 col-form-label">{{ __('Old Password') }}</label>
+                                <label class="col-md-3 col-form-label">Contraseña actual:</label>
                                 <div class="col-md-9">
-                                    <div class="form-group">
-                                        <input type="password" name="old_password" class="form-control" placeholder="Old password" required>
+                                    <div class="form-group mb-0">
+                                        <input type="password" name="old_password" class="form-control"
+                                            placeholder="Contraseña actual" required>
                                     </div>
                                     @if ($errors->has('old_password'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('old_password') }}</strong>
                                         </span>
                                     @endif
+
                                 </div>
                             </div>
                             <div class="row">
-                                <label class="col-md-3 col-form-label">{{ __('New Password') }}</label>
+                                <label class="col-md-3 col-form-label">Contraseña nueva:</label>
                                 <div class="col-md-9">
-                                    <div class="form-group">
-                                        <input type="password" name="password" class="form-control" placeholder="Password" required>
+                                    <div class="form-group mb-0 mt-2">
+                                        <input type="password" name="password" class="form-control"
+                                            placeholder="Contraseña nueva" required>
                                     </div>
                                     @if ($errors->has('password'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
                                             <strong>{{ $errors->first('password') }}</strong>
                                         </span>
                                     @endif
+
                                 </div>
                             </div>
                             <div class="row">
-                                <label class="col-md-3 col-form-label">{{ __('Password Confirmation') }}</label>
+                                <label class="col-md-3 col-form-label">Confirmar nueva contraseña:</label>
                                 <div class="col-md-9">
-                                    <div class="form-group">
-                                        <input type="password" name="password_confirmation" class="form-control" placeholder="Password Confirmation" required>
+                                    <div class="form-group m-0 mt-2">
+                                        <input type="password" name="password_confirmation" class="form-control"
+                                            placeholder="Confirma tu nueva contraseña" required>
                                     </div>
                                     @if ($errors->has('password_confirmation'))
                                         <span class="invalid-feedback" style="display: block;" role="alert">
@@ -233,7 +269,7 @@
                         <div class="card-footer ">
                             <div class="row">
                                 <div class="col-md-12 text-center">
-                                    <button type="submit" class="btn btn-info btn-round">{{ __('Save Changes') }}</button>
+                                    <button type="submit" class="btn btn-info btn-round">Guardar cambios</button>
                                 </div>
                             </div>
                         </div>

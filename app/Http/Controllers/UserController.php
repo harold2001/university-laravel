@@ -68,7 +68,7 @@ class UserController extends Controller
                 if ($newUser->hasRole('alumno')) {
                     $newData->id_code = "A" . fake()->unique()->ean8();
                 } else {
-                    $newData->id_code = "P" . fake()->unique()->ean8();
+                    $newData->id_code = "M" . fake()->unique()->ean8();
                 }
                 $newData->save();
 
@@ -132,6 +132,9 @@ class UserController extends Controller
 
                     if (($rolesUser[0] === "admin" || "maestro") && $newRol === "alumno") {
                         $userData->id_code = "A" . substr($userData->id_code, 1);
+                        $userData->save();
+                    } else {
+                        $userData->id_code = "M" . substr($userData->id_code, 1);
                         $userData->save();
                     }
                 } else {
