@@ -10,7 +10,7 @@ class CareerSeeder extends Seeder
 {
     public function run(): void
     {
-        $Careers = [
+        $careers = [
             [
                 "name" => "Front-End",
                 "description" => "Aprenderás a usar las teconologías básicas para el desarrollo de web como JavaScript, HTML, CSS, entre otras."
@@ -21,10 +21,10 @@ class CareerSeeder extends Seeder
             ]
         ];
 
-        foreach ($Careers as $Career) {
+        foreach ($careers as $career) {
             Career::create([
-                "name" => $Career["name"],
-                "description" => $Career["description"]
+                "name" => $career["name"],
+                "description" => $career["description"]
             ]);
         }
     }
