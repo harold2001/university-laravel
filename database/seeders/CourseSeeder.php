@@ -21,7 +21,7 @@ class CourseSeeder extends Seeder
             ["JavaScript V", "Leguaje inicial para aprender programacion", "http://zoom.us", "1", "5"],
             ["JavaScript VI", "Leguaje inicial para aprender programacion", "http://zoom.us", "1", "6"],
             ["JavaScript VII", "Leguaje inicial para aprender programacion", "http://zoom.us", "1", "7"],
-            ["JavaScript VII", "Leguaje inicial para aprender programacion", "http://zoom.us", "1", "8"],
+            ["JavaScript VIII", "Leguaje inicial para aprender programacion", "http://zoom.us", "1", "8"],
             ["PHP I", "Leguaje inicial para aprender programacion Backend", "http://zoom.us", "2", "1"],
             ["PHP II", "Leguaje inicial para aprender programacion Backend", "http://zoom.us", "2", "2"],
             ["PHP III", "Leguaje inicial para aprender programacion Backend", "http://zoom.us", "2", "3"],

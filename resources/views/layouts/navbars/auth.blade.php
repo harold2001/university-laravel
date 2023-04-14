@@ -33,6 +33,13 @@
                     <span class="sidebar-normal">USUARIOS</span>
                 </a>
             </li>
+            <li class="{{ $elementActive == 'courses' ? 'active' : '' }}">
+                <a href="{{ route('courses.index') }}">
+                    <i class="nc-icon nc-book-bookmark"></i>
+
+                    <span class="sidebar-normal">CURSOS</span>
+                </a>
+            </li>
 
             {{-- <li class="{{ $elementActive == 'users' ? 'active' : '' }}"> --}}
                 {{-- <a data-toggle="collapse" aria-expanded="true" href="#laravelExamples"> --}}
