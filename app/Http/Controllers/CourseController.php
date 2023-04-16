@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Career;
 use App\Models\Course;
+use App\Models\Semester;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CourseController extends Controller
 {
@@ -14,6 +17,8 @@ class CourseController extends Controller
     {
         return view("courses.index", [
             "courses" => Course::all(),
+            "semesters" => Semester::all(),
+            "careers" => Career::all()
         ]);
     }
 
@@ -46,7 +51,6 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        //
     }
 
     /**
@@ -54,7 +58,21 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            "name" => "required||min:6",
+            "link" => "required",
+            "semester_id" => "required",
+            "career_id" => "required",
+            "description" => "required",
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrorStatus("Error al actualizar. Verifique los datos.")->withInput();
+        }
+        
+        $course->update($request->all());
+        // return $course;
+        return back()->withUpdatedStatus("Curso actualizado.");
     }
 
     /**
@@ -62,6 +80,7 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        //
+        $course->delete();
+        return back()->withDeletedStatus("Usuario eliminado");
     }
 }

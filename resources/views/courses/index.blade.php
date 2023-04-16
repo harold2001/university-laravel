@@ -5,6 +5,16 @@
 
 @section('content')
     <div class="content">
+        @if (session('deleted_status'))
+            <div class="alert alert-danger" role="alert">
+                {{ session('deleted_status') }}
+            </div>
+        @endif
+        @if (session('error_status'))
+            <div class="alert alert-danger" role="alert">
+                {{ session('error_status') }}
+            </div>
+        @endif
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -51,21 +61,60 @@
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="{{ route('users.update', $course->id) }}"
+                                                        <form action="{{ route('courses.update', $course->id) }}"
                                                             method="post" enctype="multipart/form-data">
                                                             @csrf
                                                             @method('put')
                                                             <div class="form-group">
                                                                 <label for="new_name_{{ $course->id }}"
                                                                     class="">Nombre del curso:</label>
-                                                                <input type="text" name="new_name" class="form-control"
+                                                                <input type="text" name="name" class="form-control"
                                                                     id="new_name_{{ $course->id }}"
                                                                     value="{{ $course->name }}" required>
                                                             </div>
                                                             <div class="form-group">
+                                                                <label for="new_link_{{ $course->id }}"
+                                                                    class="">Link de la clase:</label>
+                                                                <input type="text" name="link" class="form-control"
+                                                                    id="new_link_{{ $course->id }}"
+                                                                    value="{{ $course->link }}" required>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="new_semester_{{ $course->id }}"
+                                                                    class="">Semestre asignado:</label>
+                                                                <select class="form-control" name="semester_id"
+                                                                    id="new_semester_{{ $course->id }}" required>
+                                                                    @foreach ($semesters as $semester)
+                                                                        @if ($semester->id === $course->semester_id)
+                                                                            <option value="{{ $semester->id }}" selected>
+                                                                                {{ $semester->name }}</option>
+                                                                        @else
+                                                                            <option value="{{ $semester->id }}">
+                                                                                {{ $semester->name }}</option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="new_semester_{{ $course->id }}"
+                                                                    class="">Carrera asignada:</label>
+                                                                <select class="form-control" name="career_id"
+                                                                    id="new_semester_{{ $course->id }}" required>
+                                                                    @foreach ($careers as $career)
+                                                                        @if ($career->id === $course->career_id)
+                                                                            <option value="{{ $career->id }}" selected>
+                                                                                {{ $career->name }}</option>
+                                                                        @else
+                                                                            <option value="{{ $career->id }}">
+                                                                                {{ $career->name }}</option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group">
                                                                 <label for="new_description_{{ $course->id }}"
                                                                     class="form-label">Descripción:</label>
-                                                                <textarea class="form-control" id="new_description_{{ $course->id }}" style="min-height: 200px" required>{{ $course->description }}</textarea>
+                                                                <textarea class="form-control" id="new_description_{{ $course->id }}" style="min-height: 200px" required name="description">{{ $course->description }}</textarea>
                                                             </div>
                                                             <div class="col-12 d-flex justify-content-end p-0 m-0">
                                                                 <button type="submit" class="btn btn-primary">Actualizar
@@ -99,7 +148,7 @@
                                                         <button type="button" class="btn btn-secondary m-0"
                                                             data-bs-dismiss="modal"
                                                             style="box-shadow: none">Cancelar</button>
-                                                        <form action="{{ route('users.destroy', $course->id) }}"
+                                                        <form action="{{ route('courses.destroy', $course->id) }}"
                                                             method="POST" class="m-0">
                                                             @csrf
                                                             @method('delete')

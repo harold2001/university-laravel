@@ -9,6 +9,8 @@ class Course extends Model
 {
     use HasFactory;
 
+    protected $fillable = ["name", "description", "link","career_id", "semester_id"];
+
     public function semester()
     {
         return $this->belongsTo(Semester::class, "semester_id", "id");
