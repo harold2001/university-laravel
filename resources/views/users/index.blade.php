@@ -112,15 +112,6 @@
                                     @endforeach
                                 </select>
                             </div>
-                            {{-- <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" value="">
-                                        Option one is this
-                                        <span class="form-check-sign">
-                                            <span class="check"></span>
-                                        </span>
-                                    </label>
-                                </div> --}}
                             <div class="col-12 d-flex justify-content-end p-0 m-0">
                                 <button type="submit" class="btn btn-primary">Añadir usuario</button>
                             </div>
@@ -136,51 +127,39 @@
                     <table class="table" id="users">
                         <thead class=" text-primary">
                             <tr>
-                                <th>Rol</th>
                                 <th>Nombre</th>
                                 <th>Apellidos</th>
                                 <th>Teléfono</th>
                                 <th>Email</th>
+                                <th>Rol</th>
                                 <th class="text-right">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
                                 <tr>
-                                    <td>
-                                        @switch($user)
-                                            @case($user->hasRole('admin'))
-                                                @php
-                                                    $hasOne = 'teacher';
-                                                @endphp
-                                                <span class="btn btn-info m-0 rol">{{ $user->getRoleNames()[0] }}</span>
-                                            @break
-
-                                            @case($user->hasRole('maestro'))
-                                                @php
-                                                    $hasOne = 'teacher';
-                                                @endphp
-                                                <span class="btn btn-info m-0 rol">{{ $user->getRoleNames()[0] }}</span>
-                                            @break
-
-                                            @case($user->hasRole('alumno'))
-                                                @php
-                                                    $hasOne = 'student';
-                                                @endphp
-                                                <span class="btn btn-info m-0 rol">{{ $user->getRoleNames()[0] }}</span>
-                                            @break
-
-                                            @default
-                                                @php
-                                                    $hasOne = 'Sólo email y password.';
-                                                @endphp
-                                                <span class="btn btn-info m-0 rol">No tiene rol</span>
-                                        @endswitch
-                                    </td>
                                     <td>{{ $user->data_user->name }}</td>
                                     <td>{{ $user->data_user->last_name }}</td>
                                     <td>{{ $user->data_user->phone }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td class="text-center">
+                                        @switch($user)
+                                            @case($user->hasRole('admin'))
+                                                <span class="btn btn-info m-0 rol">{{ $user->getRoleNames()[0] }}</span>
+                                            @break
+
+                                            @case($user->hasRole('maestro'))
+                                                <span class="btn btn-info m-0 rol">{{ $user->getRoleNames()[0] }}</span>
+                                            @break
+
+                                            @case($user->hasRole('alumno'))
+                                                <span class="btn btn-info m-0 rol">{{ $user->getRoleNames()[0] }}</span>
+                                            @break
+
+                                            @default
+                                                <span class="btn btn-info m-0 rol">No tiene rol</span>
+                                        @endswitch
+                                    </td>
                                     <td class="text-right">
                                         <!-- Edit Button-->
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -199,14 +178,17 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                            Editar datos de {{ $user->data_user->name }} {{ $user->data_user->last_name }}
+                                                            Editar datos de {{ $user->data_user->name }}
+                                                            {{ $user->data_user->last_name }}
                                                         </h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         @if ($user->hasAnyRole(['maestro', 'alumno']))
-                                                            <strong class="form-text text-muted text-center mt-0 mb-2">Si cambias el rol de este usuario a "alumno" o "maestro", su código de identificación será actualizado.</strong>
+                                                            <strong class="form-text text-muted text-center mt-0 mb-2">Si
+                                                                cambias el rol de este usuario a "alumno" o "maestro", su
+                                                                código de identificación será actualizado.</strong>
                                                         @endif
                                                         <form action="{{ route('users.update', $user->id) }}"
                                                             method="post" enctype="multipart/form-data">
@@ -345,20 +327,6 @@
                                             </div>
                                         </div>
                                     </td>
-                                    {{-- 
-                                    @if ($hasOne !== 'Sólo email y password.')
-                                        <td>{{ $user->$hasOne->name }}</td>
-                                        <td>{{ $user->$hasOne->last_name }}</td>
-                                        <td>{{ $user->$hasOne->phone }}</td>
-                                        <td>{{ $user->email }}</td>
-                                    @else
-                                        <td>{{ $hasOne }}</td>
-                                        <td>{{ $hasOne }}</td>
-                                        <td>{{ $hasOne }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $hasOne }}</td>
-                                    @endif --}}
-
                                 </tr>
                             @endforeach
                         </tbody>
@@ -366,24 +334,25 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-        <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
-        <script src="https://cdn.datatables.net/responsive/2.4.1/js/responsive.bootstrap5.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.1/js/responsive.bootstrap5.min.js"></script>
 
-        <script>
-            $(document).ready(function() {
-                $('#users').DataTable({
-                    responsive: true,
-                    autoWidth: false
-                });
+    <script>
+        $(document).ready(function() {
+            $('#users').DataTable({
+                responsive: true,
+                autoWidth: false
             });
-        </script>
-        <style>
-            .rol {
-                cursor: default !important;
-            }
-        </style>
-    @endsection
+        });
+    </script>
+    <style>
+        .rol {
+            cursor: default !important;
+        }
+    </style>
+@endsection

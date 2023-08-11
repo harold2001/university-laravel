@@ -26,34 +26,42 @@
                     <span class="sidebar-normal">MI PERFIL</span>
                 </a>
             </li>
-
             <li class="{{ $elementActive == 'users' ? 'active' : '' }}">
-                <a data-toggle="collapse" aria-expanded="true" href="#laravelExamples">
-                    {{-- <i class="nc-icon"><img src="{{ asset('paper/img/laravel.svg') }}"></i> --}}
+                <a href="{{ route('users.index') }}">
                     <i class="nc-icon nc-badge"></i>
+
+                    <span class="sidebar-normal">USUARIOS</span>
+                </a>
+            </li>
+            <li class="{{ $elementActive == 'courses' ? 'active' : '' }}">
+                <a href="{{ route('courses.index') }}">
+                    <i class="nc-icon nc-book-bookmark"></i>
+
+                    <span class="sidebar-normal">CURSOS</span>
+                </a>
+            </li>
+
+            {{-- <li class="{{ $elementActive == 'users' ? 'active' : '' }}"> --}}
+                {{-- <a data-toggle="collapse" aria-expanded="true" href="#laravelExamples"> --}}
+                    {{-- <i class="nc-icon"><img src="{{ asset('paper/img/laravel.svg') }}"></i> --}}
+                    {{-- <i class="nc-icon nc-badge"></i>
                     <p>
                         USUARIOS
                         <b class="caret"></b>
                     </p>
                 </a>
                 <div class="collapse show" id="laravelExamples">
-                    <ul class="nav">
-                        <li class="{{ $elementActive == 'users' ? 'active' : '' }}">
-                            <a href="{{ route('users.index') }}">
-                                <span class="sidebar-mini-icon"><img src="{{ asset('paper/img/users.svg') }}"
+                    <ul class="nav"> --}}
+                        {{-- <li class="{{ $elementActive == 'users' ? 'active' : '' }}"> --}}
+                            {{-- <a href="{{ route('users.index') }}"> --}}
+                                {{-- <span class="sidebar-mini-icon"><img src="{{ asset('paper/img/users.svg') }}"
                                         alt="Users" height="20"></span>
                                 <span class="sidebar-normal">TODOS</span>
                             </a>
                         </li>
-                        {{-- <li class="{{ $elementActive == 'user' ? 'active' : '' }}">
-                            <a href="{{ route('page.index', 'user') }}">
-                                <span class="sidebar-mini-icon">{{ __('U') }}</span>
-                                <span class="sidebar-normal">{{ __(' User Management ') }}</span>
-                            </a>
-                        </li> --}}
                     </ul>
                 </div>
-            </li>
+            </li> --}}
             <li class="{{ $elementActive == 'icons' ? 'active' : '' }}">
                 <a href="{{ route('page.index', 'icons') }}">
                     <i class="nc-icon nc-diamond"></i>

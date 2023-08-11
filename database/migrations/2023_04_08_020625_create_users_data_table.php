@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("name");
             $table->string("last_name");
             $table->string("phone")->nullable();
-            $table->string("id_code")->nullable();
+            $table->string("id_code");
             $table->text("url_avatar")->nullable();
         });
     }
