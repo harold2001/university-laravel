@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             $this->call(TeacherSeeder::class);
         }
 
+        
         for ($i = 0; $i < $amountUsers; $i++) {
             $this->call(StudentSeeder::class);
         }
